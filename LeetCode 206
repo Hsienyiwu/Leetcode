@@ -1,0 +1,33 @@
+LeetCode 206 Reversed Linked List
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+1->2->3->4->5
+
+###coding answer Runtime: 0 ms###
+
+class ListNode:
+  def __init__(self, val=0,next=None):
+         self.val=val
+         self.next=next
+def reverseList(head):
+   prev=None #虛擬節點(sentinel)
+   curr=head #當前待反轉的節點
+   while=curr:
+     next_node=curr.next #記住下一個位置(的地址) #用next_node保存curr.next
+     curr.next=prev #反轉指針
+     prev=curr #移動prev指針
+     curr=next #移動curr指針
+return prev #新頭節點
+#測試
+node3=ListNode(9)
+node2=ListNode(8, node3)
+node1=ListNode(7, node2)
+head= node1
+new_head=reverseList(head)
+#打印結果:9->8->7->None
+while new_head:
+  print(new_head.val, end="->")
+  new_head = new_head.next
+print("None")
+
+
+reference video from youtube>>>https://youtu.be/bIuVgt-emS8?feature=shared
