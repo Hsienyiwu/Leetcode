@@ -11,3 +11,38 @@ class Solution:
                 if nums[j] > nums[j+1]:
                     nums[j], nums[j+1] = nums[j+1], nums[j]
         return nums
+
+###in-place version###
+import random
+
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quickSort(l, r):
+            if l >= r : return
+            #隨機選pivot並交換到最右
+            pivot_idx = random.randint(l, r)
+            nums[pivot_idx], nums[r] = nums[r], nums[pivot_idx]
+            pivot = nums[r]
+
+            #三路分割:i 是左邊界，k是右邊界，j是當前指針
+            i, j, k = l, l, r
+            while j <=k:
+                if nums[j] < pivot: 
+                    nums[i], nums[j] = nums[j], nums[i]
+                    i += 1
+                    j += 1
+                elif nums[j] > pivot:
+                    nums[j] , nums[k] = nums[k], nums[j]
+                    k -= 1
+                else:
+                    j += 1
+            #只遞迴處理小於和大於的部分
+            quickSort(l, i-1)
+            quickSort(k+1, r)
+
+        quickSort(0, len(nums)-1)
+        return nums
+
+
+
