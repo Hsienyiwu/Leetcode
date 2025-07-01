@@ -12,7 +12,7 @@ class Solution:
                     nums[j], nums[j+1] = nums[j+1], nums[j]
         return nums
 
-###in-place version###
+###in-place version;不符合時間限制要求###
 import random
 
 
@@ -43,6 +43,29 @@ class Solution:
 
         quickSort(0, len(nums)-1)
         return nums
+
+
+###right answer coding!!!match 時間限制要求###
+
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quick_sort(l, r):
+            if l >= r: return
+            #隨機化pivot並交換到末尾
+            pivot_idx = random.randint(l, r)
+            nums[pivot_idx], nums[r] = nums[r], nums[pivot_idx]
+            pivot = nums[r]
+            i=l #是l並非1
+            for j in range(l, r):
+                if nums[j] <= pivot:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    i +=1
+            nums[i], nums[r] = nums[r], nums[i]
+            quick_sort(l, i-1)
+            quick_sort(i+1, r)
+        quick_sort(0, len(nums)-1)
+        return nums 
 
 
 
