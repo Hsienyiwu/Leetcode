@@ -1,0 +1,26 @@
+###基本的二分查找題型，進階題為leetcode153###
+num_list = [1, 8, 10, 89, 1000, 1234]
+def binary_search(my_list, find_val):
+  left_index, right_index = 0, len(my_list) - 1
+  #定義找到數的索引(先假定沒有找到)
+  find_index = -1
+  #使用while loop，不斷折半比較
+  while left_index <= right_index:
+    mid_index = (left_index + right_index) // 2
+    #如果mid_val>find_val則到左邊查找
+    if my_list[mid_index] > find_val:
+      right_index = mid_index - 1
+    #如果mid_val<find_val則到右邊查找
+    elif my_list[mid_index] < find_val:
+      left_index = mid_index + 1
+    #如果mid_val=find_val則找到
+    else:
+      find_index = mid_index
+      break
+  return find_index
+#測試
+res_index = binary_search(num_list, 1000)
+if res_index == -1:
+  print("沒有找到對應的值")
+else:
+  print("找到對應的值，索引是", res_index)
