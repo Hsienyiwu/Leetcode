@@ -1,0 +1,21 @@
+###coding answer:155 runtime:17ms###
+class MinStack:
+    def __init__(self):
+        self. stack = []
+        self. min_stack =[] #輔助棧，棧頂始終是當前最小值
+
+    def push(self, val: int) -> None:
+        self. stack. append(val) #輔助棧壓入當前最小值(新值與棧頂的較小者)
+        if not self.min_stack: self.min_stack.append(val)
+        else: 
+            self.min_stack.append(min(val, self.min_stack[-1]))
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.min_stack.pop() #同步彈出        
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.min_stack[-1]        
