@@ -1,0 +1,24 @@
+###original coding answer###
+class Solution:
+    def climbStairs(self, n): #加上self參數
+        if n <= 2:
+            return n 
+        else:
+            return self.climbStairs(n-1) + self.climbStairs(n-2) #呼叫時也要用self
+
+###optimized coding answer of Memoization###
+from functools import lru_cache
+class Solution:
+    @lru_cache(maxsize=None)
+    def climbStairs(self, n): #加上self參數
+        if n <= 2:
+            return n 
+        return self.climbStairs(n-1) + self.climbStairs(n-2) #呼叫時也要用self
+
+###recommend coding answer of iterative###
+class Solution:
+    def climbStairs(self, n): #加上self參數
+        a, b = 1, 1
+        for _ in range(n):
+            a, b = b, a+b
+        return a
