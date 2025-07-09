@@ -1,0 +1,57 @@
+###Method 1:the coding answer of recursion###
+class Solution:
+    def maxDepth(self, root):
+        if not root:
+            return 0
+        left = self.maxDepth(root.left) #左子樹深度
+        right = self.maxDepth(root.right) #右子樹深度
+        return max(left, right) + 1 #當前節點深度
+
+###Method 2:the coding answer of iterative###
+class Solution:
+    def maxDepth(self, root): #方法名必須與調用名一致
+        if not root:
+            return 0
+        queue = collections.deque([(root, 1)]) #改用 deque提升pop(0) 效率
+        max_depth = 0
+        while queue:
+            node, depth = queue.popleft() #O(1) 時間
+            max_depth = max(max_depth, depth)
+            for child in [node.left, node.right]: #循環處理子節點，減少重複代碼
+                if child:
+                    queue.append((child, depth + 1))
+        return max_depth
+
+
+###Method3:BFS iterative###
+class Solution:
+    def maxDepth(self, root): 
+        if not root:
+            return 0
+        queue = deque([(root, 1)]) 
+        max_depth = 0
+        while queue:
+            node, depth = queue.popleft() #關鍵點:先進先出
+            max_depth = max(max_depth, depth)
+            #層級擴散邏輯
+            for child in [node.left, node.right]: 
+                if child:
+                    queue.append((child, depth + 1)) #保持元組結構
+        return max_depth
+
+###Method4: DFS iterative###
+class Solution:
+       def maxDepth(self, root): 
+        if not root:
+            return 0
+        stack = ([(root, 1)]) 
+        max_depth = 0
+        while stack:
+            node, depth = stack.pop() #關鍵點:後進先出
+            max_depth = max(max_depth, depth)
+            #注意壓棧順序!先右後左 =標準前序
+            if node.right:
+                stack.append((node.right, depth + 1))
+            if node.left:
+                stack.append((node.left, depth + 1))
+        return max_depth
