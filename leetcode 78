@@ -1,0 +1,31 @@
+###wrong answer but follow templete###
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def backtrack(start, path):
+            res.append(path.copy()) #關鍵!記錄當前子集
+            for i in range(start, len(nums)):
+                path.append(nums[i]) #選擇 nums[i]
+                backtrack(i + 1, path) #探索下一層
+                path.pop() #撤銷選擇(回溯)
+                backtrack(0, [])
+                return res
+
+
+###correct answer of transformed 1###
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        def backtrack(index, path):
+            if index == len(nums):
+                res.append(path.copy())
+
+                return
+            #不選當前數字
+            backtrack(index + 1, path)
+            #選當前數字
+            path.append(nums[index])
+            backtrack(index + 1, path) 
+            path.pop()
+        backtrack(0, [])
+        return res
