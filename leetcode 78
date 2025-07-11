@@ -30,8 +30,7 @@ class Solution:
         backtrack(0, [])
         return res
 ###summary for correct answer of transformed###
-class Solution: #方案類
-  #終止條件(記住當前狀態)
+class Solution: #類名應為大寫開頭
   def subsets(self, nums):
      res = []  #存儲所有子集的結果
     #回溯題型變形開始
@@ -44,12 +43,12 @@ class Solution: #方案類
       #選當前數字
       path.append(nums[index])  
       backtrack(index + 1, path) 
-      path.pop()     #回溯，移除當前數字
-    #恢復目前狀態  
+      path.pop()     #回溯，移除當前數字 
      backtrack(0, []) #從索引0和空路徑開始
      return res #終止函數執行
 #測試範例
 sol = Solution()
 print(sol.subsets([1,2,3]))
+
 _________________________________________________________________________________________________
 output=> [[], [3], [2], [2, 3], [1], [1, 3], [1, 2], [1, 2, 3]]
