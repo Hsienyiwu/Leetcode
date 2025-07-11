@@ -13,6 +13,7 @@ class Solution:
       path.pop()
       #@跳過重複數字
       while index + 1 < len(nums) and nums[index] == nums[index + 1]:
+        print(index, path) #debug技巧
         index += 1
       #不選當前數字(且跳過重複)
       backtrack(index + 1, path)
@@ -21,4 +22,6 @@ class Solution:
   
 print(Solution().subsetsWithDup([1, 2, 2]))
 ------------------------------------------------------------------------------
+1 [1]
+1 []
 [[1, 2, 2], [1, 2], [1], [2, 2], [2], []]
