@@ -35,7 +35,7 @@ class Solution: #方案類
   def subsets(self, nums):
      res = []  #存儲所有子集的結果
     #回溯題型變形開始
-     def backtrack(index, path): #定義回溯狀態參數，index表示當前的數字索引，path表示當前路徑
+     def backtrack(index, path): #定義回溯函數，index表示當前的數字索引，path表示當前路徑
       if index == len(nums): #終止條件:處理完所有數字
         res.append(path.copy()) #將當前路徑(子集)加入結果
         return  #控制函數流程(不再繼續函數的後續執行)
