@@ -1,0 +1,20 @@
+### correct coding###
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        nums.sort() #@先排序，讓重複元素相鄰
+        def backtrack(index, path):
+            if index == len(nums):
+                res.append(path.copy())
+                return
+            #選擇當前數字
+            path.append(nums[index])
+            backtrack(index + 1, path)
+            path.pop()
+            #@跳過重複數字
+            while index + 1 < len(nums) and nums[index] == nums[index + 1]:
+                index += 1
+            #不選當前數字
+            backtrack(index + 1, path)
+        backtrack(0, [])
+        return res 
