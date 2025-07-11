@@ -25,3 +25,42 @@ print(Solution().subsetsWithDup([1, 2, 2]))
 1 [1]
 1 []
 [[1, 2, 2], [1, 2], [1], [2, 2], [2], []]
+
+
+###debug方式，看電腦如何跳過重複index###
+###print(f"當前index = {index}, path = {path}") #debug用###
+class Solution:
+  def subsetsWithDup(self, nums):
+    res = []
+    nums.sort() #@先排序，讓重複元素相鄰
+    def backtrack(index, path):
+      print(f"當前index = {index}, path = {path}") #debug用
+      if index == len(nums):
+         res.append(path.copy())
+         return
+      #選擇當前數字(先選)
+      path.append(nums[index])
+      backtrack(index + 1, path)
+      path.pop()
+      #@跳過重複數字
+      while index + 1 < len(nums) and nums[index] == nums[index + 1]:
+        index += 1
+      #不選當前數字(且跳過重複)
+      backtrack(index + 1, path)
+    backtrack(0, [])
+    return res
+
+print(Solution().subsetsWithDup([1, 2, 2]))
+___________________________________________________________________________
+當前index = 0, path = []
+當前index = 1, path = [1]
+當前index = 2, path = [1, 2]
+當前index = 3, path = [1, 2, 2]
+當前index = 3, path = [1, 2]
+當前index = 3, path = [1]
+當前index = 1, path = []
+當前index = 2, path = [2]
+當前index = 3, path = [2, 2]
+當前index = 3, path = [2]
+當前index = 3, path = []
+[[1, 2, 2], [1, 2], [1], [2, 2], [2], []]
