@@ -1,0 +1,29 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        #edge
+        if not grid:
+            return 0
+
+        num_islands = 0
+        rows, cols = len(grid), len(grid[0])
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == "1":
+                    self.dfs(grid, r, c)
+                    num_islands += 1
+        return num_islands
+
+    def dfs(self, grid, r, c):
+        #邊界檢查和有效性檢查合併
+        if r < 0 or c < 0 or r >= len(grid) or c >= len(grid[0]) or grid[r][c]!= "1":
+            return
+        grid[r][c]="0" #標記為已訪問
+        #更清晰的方向定義(避免每次遞歸都重新計算)
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    
+        for dr, dc in directions:
+            self.dfs(grid, r+dr, c+dc)
+
+#TC:O(R)*O(C)
+#SC:O(R)*O(C)
