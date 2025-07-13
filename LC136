@@ -1,0 +1,15 @@
+###2025/07/13 Easy###
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        res = 0 #初始化結果變數，用於累積XOR運算
+        for num in nums: #遍歷陣列中的每個數字，nums是input
+            res ^= num #對當前數字和res做XOR運算，相同數字會抵消(a^a = 0)
+                       #最後剩下的就是唯一出現一次的數字(a ^ 0 = a)
+        return res #返回唯一數字
+        #數學證明:
+        #假設陣列 =[a, b, a]，則res = 0^ a ^ b ^ a
+        #                          = (a ^ a)^b #XOR滿足交換律和結合律
+        #                          = 0 ^ b = b       
+#時間複雜度:O(n)，因線性遍歷整個陣列
+#空間複雜度:O(1)，只使用固定空間變數 res
