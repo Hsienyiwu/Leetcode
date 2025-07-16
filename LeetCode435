@@ -1,0 +1,27 @@
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        #邊界條件檢查:如果區間列表為空，直接返回0(沒有區間需要移除，最少刪除區間情況下)
+        if not intervals:
+            return 0
+        #關鍵步驟1:按照區間的"結束時間"進行排序
+        #使用lambda函數指定排序依據為每個區間的第二個元素(結束時間)
+        intervals.sort(key = lambda x:x[1])
+        #初始化:
+        #max_non_overlapping(count)紀錄最多能有多少個不重疊的區間，初始為1(至少有一個[1,2])
+        max_non_overlapping = 1
+        #end紀錄當前選中的區間的結束時間，初始為第一個區間的結束時間
+        end = intervals[0][1]
+        #從第二個區間開始遍歷(因為第一個已經被選中了)
+        for i in range(1, len(intervals)):
+            #當前區間的開始時間>=前一個選中區間的結束時間
+            #表示這兩個區間不重疊
+            if intervals[i][0] >= end:
+                #可以選擇這個區間，所以max_non_overlapping(count)加1
+                max_non_overlapping += 1
+                #更新end為當前區間的結束時間
+                end = intervals[i][1]
+        #這裡有隱含的貪心選擇:
+        #因為我們是按照結束時間排序的，
+        #所以每次選擇結束最早的區間能留下更多空間給後面的區間
+        #最終結果=總區間數-最多不重疊區間數
+        return len(intervals) - max_non_overlapping
