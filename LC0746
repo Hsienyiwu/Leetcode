@@ -1,0 +1,36 @@
+###1.遞歸+記憶化(Top-down)###
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        memo = {} #memo字典避免重複計算
+
+        def dfs(n):
+            if n in memo: return memo[n]
+            if n <= 1: return cost[n] #基礎case : 起步必須付錢
+
+            memo[n] = cost[n] + min(dfs(n-1), dfs(n-2)) #核心遞推
+            return memo[n]
+
+        n = len(cost)
+        return min(dfs(n-1), dfs(n-2)) #最後一步免費跳躍 #最後比較n-1和n-2是因為:登頂不算台階   
+
+###2.DP迭代(Bottom-up)###
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        n = len(cost)
+        dp = [0] * n
+        dp[0], dp[1] = cost[0], cost[1] #起步費
+
+        for i in range(2, n):
+            dp[i] = cost[i] + min(dp[i-1], dp[i-2]) #狀態轉移
+
+        return min(dp[-1], dp[-2]) #二選一跳樓頂
+
+###3.空間優化版(o(1)空間)
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        prev, curr = cost[0], cost[1]
+
+        for i in range(2, len(cost)):
+            prev, curr = curr, cost[i] + min(prev, curr) #雙指針滾動
+        
+        return min(prev, curr)
