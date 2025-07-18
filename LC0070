@@ -22,3 +22,11 @@ class Solution:
         for _ in range(n):
             a, b = b, a+b
         return a
+
+###DP 動態規劃-終極進化版07/18/25###
+class Solution:
+    def climbStairs(self, n): #加上self參數
+        a, b = 1, 2
+        for _ in range(n-1):
+            a, b = b, a+b #只保留最後兩步狀態
+        return a
