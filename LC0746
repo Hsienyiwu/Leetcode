@@ -34,3 +34,17 @@ class Solution:
             prev, curr = curr, cost[i] + min(prev, curr) #雙指針滾動
         
         return min(prev, curr)
+
+
+====================================================================================================
+
+###終極代碼與物理動線對應###
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        dp = [0] * len(cost)
+        dp[0], dp[1] = cost[0], cost[1] #初始化:站在第0/1階時的累計花費(已付費)
+
+        for i in range(2, len(cost)):
+            dp[i] = cost[i] + min(dp[i-1], dp[i-2]) #從前面兩階跳過來
+
+        return min(dp[-1], dp[-2]) #最後一步從倒數兩階免費登頂
