@@ -9,15 +9,19 @@ class ListNode:
          self.val=val
          self.next=next
 def reverseList(head):
+#1.初始化
    prev=None #虛擬節點(sentinel)
    curr=head #當前待反轉的節點
+#2.遍歷時翻轉箭頭
    while=curr:
      next_node=curr.next #記住下一個位置(的地址) #用next_node保存curr.next
      curr.next=prev #反轉指針
      prev=curr #移動prev指針(prev前進)
      curr=next #移動curr指針(curr前進)
+#3.返回新頭
 return prev #新頭節點(新頭結點就是prev)
-#測試
+
+#4.測試
 node3=ListNode(9)
 node2=ListNode(8, node3)
 node1=ListNode(7, node2)
@@ -35,12 +39,14 @@ reference video from youtube>>>https://youtu.be/bIuVgt-emS8?feature=shared
 ###遞歸法###
 class Solution:
     def reverseList(self, head):
+#1. base case
         if not head or not head.next:
             #空鏈表或只剩一個節點
             return head
-        new_head =self.reverseList(head.next) #相信遞歸能反轉後面的!
+#2.遞歸關係
+        new_head =self.reverseList(head.next) #相信遞歸能反轉後面的! #先反轉後面的部分
         head.next.next = head
         #讓下一個節點指向自己
         head.next = None
         #斷開原箭頭
-        return new_head
+        return new_head #傳遞新頭
