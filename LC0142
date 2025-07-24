@@ -1,0 +1,15 @@
+###迭代法:45ms###
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = fast = head
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+            if slow == fast:
+            #在相遇點後，重置慢指針到head，同速移動
+                slow = head #龜重置
+                while slow != fast : #同速移動
+                    slow, fast = slow.next, fast.next
+                return slow #環入口
+        return None
+
+###遞歸法:
