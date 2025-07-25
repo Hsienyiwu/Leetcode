@@ -20,3 +20,20 @@ class Solution:
          slow = slow. next
          fast = fast. next. next
        return True   #龜兔相遇=有環
+
+###遞歸法###
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+       visited = set() #紀錄已訪問節點
+
+       def helper(node):
+        if not node:
+            return False
+        if node in visited: #遇到已訪問節點->有環
+
+            return True
+        visited.add(node)
+        return helper(node.next) #遞歸檢查下一個節點
+
+       return helper(head)
