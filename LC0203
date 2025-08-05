@@ -1,0 +1,23 @@
+###方法1:迭代法(使用虛擬頭節點)### !推薦方法!
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        #創建虛擬頭節點，指向真正的頭節點
+        dummy = ListNode(next=head)
+        current = dummy
+
+        while current.next:
+            if current.next.val == val:
+                #跳過(刪除)下一個節點
+                current.next = current.next.next
+            else:
+                #移動到下一個節點
+                current = current.next
+        
+        return dummy.next
+
+###方法2:遞歸解法###
