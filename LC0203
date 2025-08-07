@@ -21,3 +21,16 @@ class Solution:
         return dummy.next
 
 ###方法2:遞歸解法###
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        if not head:
+            return None
+        #遞歸處理後續節點
+        head.next = self.removeElements(head.next, val)
+        #如果當前節點需要刪除，返回下一個節點
+        return head.next if head.val == val else head
