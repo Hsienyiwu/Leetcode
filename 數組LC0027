@@ -8,5 +8,15 @@ class Solution:
                 slow += 1
         return slow
 
+###貼合題意版###
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        k = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[k] = nums[i]
+                k += 1
+        return k
+
 ###解法2:優化版(減少賦值次數)###
 
