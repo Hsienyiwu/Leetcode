@@ -1,0 +1,10 @@
+###雙指針(快慢指針)###
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        prev, ptr = None, 0
+        for num in nums:
+          if num != prev:
+            nums[ptr] = num
+            ptr += 1
+            prev = num
+        return ptr
