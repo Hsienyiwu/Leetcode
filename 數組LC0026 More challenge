@@ -8,3 +8,17 @@ class Solution:
             ptr += 1
             prev = num
         return ptr
+
+###使用題意的雙指針(快慢指針)###
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        fast, slow, k = 0, 0, 0
+        while slow < len(nums):
+            if nums[fast] == nums[slow]:
+                slow += 1
+            else:
+                nums[k] = nums [fast]
+                fast = slow
+                k += 1
+        nums[k] = nums[fast]
+        return k + 1
