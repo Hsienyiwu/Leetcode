@@ -1,1 +1,13 @@
-
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        groups = defaultdict(list)
+        for s in strs:
+            #改用"字頻字典"當key，而非排序或陣列
+            freq = {}
+            for c in s:
+                freq[c] = freq.get(c, 0) + 1
+            #因為python的dict不可hash，轉成forzenset或tuple排序
+            key = frozenset(freq.items())
+            #例如frozenset({("e", 1), ("a", 1), ("t", 1)})
+            groups[key].append(s)
+        return list(groups.values())
