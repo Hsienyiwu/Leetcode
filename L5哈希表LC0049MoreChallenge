@@ -11,3 +11,18 @@ class Solution:
             #例如frozenset({("e", 1), ("a", 1), ("t", 1)})
             groups[key].append(s)
         return list(groups.values())
+
+###轉成tuple排序當key###
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        groups = defaultdict(list)
+        for s in strs:
+            #用字典統計"原始字符"頻率(區分大小寫)
+            freq = {}
+            for c in s:
+                freq[c] = freq.get(c, 0) + 1
+            #轉成tuple排序當key，例如("E", 1), ("a", 1),("t", 1)
+            key = tuple(sorted(freq.items()))
+            #例如frozenset({("e", 1), ("a", 1), ("t", 1)})
+            groups[key].append(s)
+        return list(groups.values())
