@@ -1,0 +1,12 @@
+@統計字母出現次數>>>使用哈希表/Counter(字典)
+###使用Collections.Counter###
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        #計算每個字母的頻率
+        ransom_count = Counter(ransomNote)
+        magazine_count = Counter(magazine)
+        #檢查ransomNote中的字母是否可以從magazine中獲得
+        for char, count in ransom_count.items():
+            if magazine_count[char]<count:
+                return False #如果magazine中對應字母的數量不夠，返回False
+        return True #否則，返回True
