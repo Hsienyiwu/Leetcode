@@ -1,0 +1,46 @@
+###第一種迭代解法###
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode() #虛擬頭用來簡化邊界
+        curr = dummy 
+
+        while list1 and list2:
+            if list1.val < list2.val:
+                list1 =list1.next
+            else:
+                curr.next = list2
+                list2 = list2.next
+            curr = curr.next
+        
+        curr.next = list1 if list1 else list2 #接上剩餘部分
+
+        return dummy.next
+
+###第二種迭代解法###
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(-1) #虛擬頭用來簡化邊界
+        current = dummy 
+
+        while list1 and list2:
+            if list1.val < list2.val:
+                current.next = list1
+                list1 =list1.next #移動較小者
+            else:
+                current.next = list2
+                list2 = list2.next
+            current = current.next
+        
+        current.next = list1 if list1 else list2 #接上剩餘部分
+
+        return dummy.next
