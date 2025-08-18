@@ -47,6 +47,10 @@ class Solution:
         return dummy.next
 
 ###遞迴解法，由於程序關係需要加上self.呼叫###
+@你寫的方法是mergeTwoLists，但是在遞迴呼叫時直接寫mergeTwoLists(...)，這裡會找不到函式，因為mergeTwoLists是Solution類別的成員方法，必須用self.mergeTwoLists(...)呼叫。
+
+@另外，你用了Optional和ListNode類型註解，但沒看到from typing import Optional的引入，若你有引入就沒問題。
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
@@ -59,9 +63,9 @@ class Solution:
         if not list2:
             return list1
         if list1.val < list2.val:
-            list1.next = self.mergeTwoLists(list1.next, list2)
+            list1.next = self.mergeTwoLists(list1.next, list2) # 改成 self.mergeTwoLists
             return list1
         else:
-            list2.next = self.mergeTwoLists(list1, list2.next)
+            list2.next = self.mergeTwoLists(list1, list2.next) # 改成 self.mergeTwoLists
             return list2
 
