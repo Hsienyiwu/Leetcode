@@ -1,0 +1,13 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        #初始化慢指針
+        j=0
+        #遍歷數組
+        for i in range(len(nums)):
+            if nums[i] != 0 :
+                #交換非零元素到慢指針位置
+                nums[j], nums[i] = nums[i], nums[j]
+                j += 1
