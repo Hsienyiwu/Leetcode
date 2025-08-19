@@ -1,0 +1,14 @@
+###面談解法###
+class Solution:
+    def removeDuplicates(self, nums):
+        if len(nums) <= 2:
+            return len(nums)
+
+        slow = 2  # 前兩個元素都可以保留
+        for fast in range(2, len(nums)):
+            # 只保留當前元素與前面第二個元素不同的（即最多保留兩個重複）
+            if nums[fast] != nums[slow - 2]:
+                nums[slow] = nums[fast]
+                slow += 1
+
+        return slow
