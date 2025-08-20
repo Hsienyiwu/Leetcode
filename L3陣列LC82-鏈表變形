@@ -1,0 +1,18 @@
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+        fast = head
+
+        while fast:
+            if fast.next and fast.val == fast.next.val:
+                # fast 跳過整段重複值
+                while fast.next and fast.val == fast.next.val:
+                    fast = fast.next
+                prev.next = fast.next  # 砍掉整段重複
+            else:
+                prev = prev.next  # 沒重複，prev 可以跟上
+            fast = fast.next  # fast 繼續前進
+
+        return dummy.next
