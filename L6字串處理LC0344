@@ -1,0 +1,10 @@
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        left, right =0, len(s)-1
+        while left < right:                       #當左指針未超過右指針時繼續執行
+            s[left], s[right] = s[right], s[left] #同時交換左右指針指向的字元
+            left += 1                             #左指針向右一格
+            right -=1                             #右指針向左一格
