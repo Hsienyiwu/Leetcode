@@ -1,4 +1,4 @@
-###Counter統計(最簡潔)
+###Counter統計(最簡潔)(hashmap練習用)
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t): #快速失敗(early return)
