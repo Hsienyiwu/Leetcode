@@ -1,0 +1,39 @@
+###解法###
+from collections import Counter
+
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2):
+            return False
+
+        need = Counter(s1)
+        window = {}
+        left = right = 0
+        valid = 0
+
+        while right < len(s2):
+            ch = s2[right]
+            right += 1
+
+            if ch in need:
+                window[ch] = window.get(ch, 0) + 1
+                if window[ch] == need[ch]:
+                    valid += 1
+
+            while right - left >= len(s1):
+                if valid == len(need):
+                    return True
+
+                ch_left = s2[left]
+                left += 1
+                if ch_left in need:
+                    if window[ch_left] == need[ch_left]:
+                        valid -= 1
+                    window[ch_left] -= 1
+
+        return False
+
+###自己測試，可以在類別外這樣呼叫：###
+s = Solution()
+print(s.checkInclusion("ab", "eidbaooo"))  # 輸出 True
+
