@@ -1,3 +1,14 @@
+面試導向的 Prefix 題目推薦路線（精選 2 題 + 延伸建議）
+✅ Step 1：14. Longest Common Prefix（入門概念 + 字串操作）
+
+為什麼先寫它？
+
+幾乎所有跟 prefix 有關的面試問題，本質上都會考到這一題的核心邏輯。
+
+練字串遍歷邏輯、最小長度處理、early stop 等技巧。
+
+面試中考過公司：Amazon、Google、Facebook 等
+
 ###滑窗第二層的前哨站###(務必練熟)
 from typing import List
 class Solution:
