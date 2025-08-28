@@ -1,0 +1,11 @@
+Step 2：208. Implement Trie (Prefix Tree)（資料結構核心）
+
+為什麼第二個？
+
+Prefix Tree (Trie) 是處理字首查詢的最重要資料結構，面試中常考。
+
+一旦你熟了這題，接下來的進階題都會大幅簡化。
+
+訓練 class 寫法、節點設計與遞迴邏輯。
+
+面試中考過公司：Google、Microsoft、Amazon
