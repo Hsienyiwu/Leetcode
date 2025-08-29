@@ -1,0 +1,17 @@
+###使用set()清楚易懂，但一格一格移除較慢###
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        char_set = set()  # 用來記錄當前視窗內出現過的字元（用 set 檢查重複效率高）
+        left = 0          # 視窗左界指標（起始位置）
+        max_len = 0       # 用來紀錄目前找到的最長無重複子字串長度
+
+        for right in range(len(s)):  # 右指標遍歷整個字串
+            while s[right] in char_set:  # 如果當前字元已存在於視窗中，表示有重複
+                char_set.remove(s[left])  # 從視窗中移除左指針指到的字元
+                left += 1                 # 左指針右移，縮小視窗，直到移除掉重複字元
+            char_set.add(s[right])  # 把目前的字元加入 set，代表它已在視窗中
+            max_len = max(max_len, right - left + 1)  # 更新最長長度（目前視窗大小）
+        
+        return max_len  # 回傳找到的最長無重複子字串的長度
+
+###使用dict()較快，進階作法###
