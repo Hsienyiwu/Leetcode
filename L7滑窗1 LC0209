@@ -14,3 +14,22 @@ class Solution:
                 left += 1  # 移動左邊界
 
         return 0 if min_len == float('inf') else min_len  # 無符合條件的子陣列則回傳 0
+
+###英文版註解###
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left = 0  # Left boundary of the sliding window
+        window_sum = 0  # Current sum of elements in the window
+        min_len = float('inf')  # Initialize minimum length as infinity
+
+        for right in range(len(nums)):  # Move the right boundary
+            window_sum += nums[right]  # Add current element to the window sum
+
+            # Shrink the window while the sum meets or exceeds the target
+            while window_sum >= target:
+                min_len = min(min_len, right - left + 1)  # Update minimum length
+                window_sum -= nums[left]  # Remove the leftmost element
+                left += 1  # Move the left boundary
+
+        # If no valid subarray was found, return 0
+        return 0 if min_len == float('inf') else min_len
