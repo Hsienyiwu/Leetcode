@@ -33,3 +33,21 @@ class Solution:
 
         # If no valid subarray was found, return 0
         return 0 if min_len == float('inf') else min_len
+
+
+###白板版程式架構（簡潔、好背）###
+def minSubArrayLen(target, nums):
+    left = 0
+    total = 0
+    res = float('inf')
+
+    for right in range(len(nums)):
+        total += nums[right]
+
+        while total >= target:
+            res = min(res, right - left + 1)
+            total -= nums[left]
+            left += 1
+
+    return 0 if res == float('inf') else res
+
