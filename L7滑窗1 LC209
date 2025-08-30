@@ -1,0 +1,16 @@
+###subarray:必須是一段連續的陣列###
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left = 0  # 視窗的左邊界索引
+        window_sum = 0  # 目前滑動視窗內元素的總和
+        min_len = float('inf')  # 初始化最小長度為無限大，方便後續更新
+
+        for right in range(len(nums)):  # 右邊界索引，從左到右移動
+            window_sum += nums[right]  # 將右側元素加入視窗
+
+            while window_sum >= target:  # 當視窗總和達到目標，嘗試縮小視窗
+                min_len = min(min_len, right - left + 1)  # 更新最短子陣列長度
+                window_sum -= nums[left]  # 移除視窗左側元素
+                left += 1  # 移動左邊界
+
+        return 0 if min_len == float('inf') else min_len  # 無符合條件的子陣列則回傳 0
