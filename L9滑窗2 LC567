@@ -37,3 +37,35 @@ class Solution:
 s = Solution()
 print(s.checkInclusion("ab", "eidbaooo"))  # 輸出 True
 
+###第2種解法，與滑動視窗同系列【包含註解】###
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        # 如果 s1 比 s2 還長，不可能有排列包含
+        if len(s1) > len(s2):
+            return False
+
+        # 初始化兩個長度為 26 的陣列，分別記錄字母出現次數
+        need = [0] * 26  # s1 的頻率表
+        window = [0] * 26  # s2 當前視窗的頻率表
+
+        # 計算 s1 的每個字母頻率
+        for ch in s1:
+            need[ord(ch) - ord('a')] += 1
+
+        m = len(s1)  # 固定視窗大小 = s1 的長度
+
+        # 遍歷 s2，每次加入右邊字元，並在超過視窗大小時移除左邊字元
+        for i, ch in enumerate(s2):
+            window[ord(ch) - ord('a')] += 1  # 加入當前字元
+
+            # 如果視窗超過 m，移除最左邊的字元
+            if i >= m:
+                window[ord(s2[i - m]) - ord('a')] -= 1
+
+            # 檢查當前視窗的頻率表是否等於 s1 的頻率表
+            if window == need:
+                return True
+
+        return False
+
+
