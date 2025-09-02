@@ -15,3 +15,37 @@ class Solution:
         return max_len  # 回傳找到的最長無重複子字串的長度
 
 ###使用dict()較快，進階作法###
+
+###「HashSet + 雙指針滑動視窗」版本:Python（HashSet 版）###
+def lengthOfLongestSubstring(s: str) -> int:
+    seen = set()
+    l = 0
+    ans = 0
+    for r, ch in enumerate(s):
+        while ch in seen:              # 視窗內已存在 ch，縮小左邊
+            seen.remove(s[l])
+            l += 1
+        seen.add(ch)                   # 把當前字元放入視窗
+        ans = max(ans, r - l + 1)      # 更新最長長度
+    return ans
+
+###「HashSet + 雙指針滑動視窗」版本:Java（HashSet 版）###
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int n = s.length(), ans = 0;
+        int l = 0;
+        for (int r = 0; r < n; r++) {
+            char ch = s.charAt(r);
+            while (set.contains(ch)) {
+                set.remove(s.charAt(l));
+                l++;
+            }
+            set.add(ch);
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
+}
+
+
