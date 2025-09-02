@@ -49,3 +49,88 @@ class Solution {
 }
 
 
+###包含測試版本的hashset:python版本###
+# HashSet + Sliding Window
+def lengthOfLongestSubstring_set(s: str) -> int:
+    seen = set()
+    l = 0
+    ans = 0
+    for r, ch in enumerate(s):
+        while ch in seen:
+            seen.remove(s[l])
+            l += 1
+        seen.add(ch)
+        ans = max(ans, r - l + 1)
+    return ans
+
+
+# Dict + Sliding Window（紀錄最後出現位置）
+def lengthOfLongestSubstring_dict(s: str) -> int:
+    last_idx = {}
+    l = 0
+    ans = 0
+    for r, ch in enumerate(s):
+        if ch in last_idx and last_idx[ch] >= l:
+            l = last_idx[ch] + 1   # 直接跳過重複字元上一次的位置
+        last_idx[ch] = r
+        ans = max(ans, r - l + 1)
+    return ans
+
+
+# 測試
+def test():
+    cases = [
+        ("abcabcbb", 3),   # "abc"
+        ("bbbbb", 1),      # "b"
+        ("pwwkew", 3),     # "wke"
+        ("", 0),           # 空字串
+        ("au", 2),         # "au"
+        ("dvdf", 3),       # "vdf"
+    ]
+
+    for s, expected in cases:
+        r1 = lengthOfLongestSubstring_set(s)
+        r2 = lengthOfLongestSubstring_dict(s)
+        print(f"Input: {s:10} | Expected: {expected} | Set: {r1}, Dict: {r2}")
+
+test()
+
+###包含測試版本的hashset:JAVA版本###
+import java.util.*;
+
+class Solution {
+    // HashSet 寫法
+    public int lengthOfLongestSubstring_set(String s) {
+        Set<Character> set = new HashSet<>();
+        int l = 0, ans = 0;
+        for (int r = 0; r < s.length(); r++) {
+            char ch = s.charAt(r);
+            while (set.contains(ch)) {
+                set.remove(s.charAt(l));
+                l++;
+            }
+            set.add(ch);
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
+
+    // Dict 寫法（用 Map 紀錄最後位置）
+    public int lengthOfLongestSubstring_dict(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int l = 0, ans = 0;
+        for (int r = 0; r < s.length(); r++) {
+            char ch = s.charAt(r);
+            if (map.containsKey(ch) && map.get(ch) >= l) {
+                l = map.get(ch) + 1;
+            }
+            map.put(ch, r);
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
+}
+
+
+
+
