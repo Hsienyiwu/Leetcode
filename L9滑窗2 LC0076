@@ -2,14 +2,15 @@ from collections import Counter
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        need = Counter(t)
-        Window = {}
-        left = right = 0
-        valid = 0
+        need = Counter(t) #題目想要的東西
+        Window = {}       #裝進視窗裡的東西
+        left = right = 0  #左指針= 視窗開頭；右指針=窗口尾端
+        valid = 0         #有幾樣東西剛好湊齊了
 
-        start = 0
-        min_len = float('inf')
+        start = 0              #紀錄最小窗口的起點
+        min_len = float('inf') #初始設定為無限大
 
+        #每次往右滑，看看下一個字元是什麼>>>把字元(c)記起來，判斷是不是題目要的(是不是在t裡)，再更新窗口記錄
         while right < len(s):
             c = s[right]  # 取字串中某一個字元
             right += 1
