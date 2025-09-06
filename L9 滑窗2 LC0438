@@ -1,0 +1,101 @@
+###解法一：滑動窗口模板（dict + valid）###
+
+思路重點：
+
+need：p 每個字元需要多少。
+
+window：當前窗口字元計數。
+
+valid：目前有多少字元的計數「剛好等於」需求。
+
+窗口固定長度 = len(p)；當長度達標就嘗試收縮並判斷是否命中。
+########################################################
+from collections import Counter
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        res = []
+        if len(p) > len(s):
+            return res
+
+        need = Counter(p)
+        window = {}
+        valid = 0
+        left = 0
+
+        for right, ch in enumerate(s):
+            # 進：擴張右邊界
+            if ch in need:
+                window[ch] = window.get(ch, 0) + 1
+                if window[ch] == need[ch]:
+                    valid += 1
+
+            # 當窗口長度達到 len(p)，開始維持固定長度
+            while right - left + 1 > len(p):
+                left_ch = s[left]
+                if left_ch in need:
+                    if window[left_ch] == need[left_ch]:
+                        valid -= 1
+                    window[left_ch] -= 1
+                left += 1
+
+            # 命中：所有需要的字元都剛好滿足
+            if right - left + 1 == len(p) and valid == len(need):
+                res.append(left)
+        return res
+
+###解法二：26 長度陣列 + 匹配數（更快、更省）###
+
+前提：字元只有 'a'..'z'。
+作法：
+
+用長度 26 的 need 與 win 陣列記錄頻次。
+
+matches 表示 26 個字母中，有幾個索引 i 滿足 win[i] == need[i]。
+
+每次右進/左出，只更新受影響那兩個字母的匹配狀態，O(1) 更新 matches。
+#################################################################
+
+from typing import List
+
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        n, m = len(s), len(p)
+        if m > n:
+            return []
+
+        def idx(c): return ord(c) - ord('a')
+
+        need = [0]*26
+        win  = [0]*26
+        for c in p:
+            need[idx(c)] += 1
+
+        for i in range(m):
+            win[idx(s[i])] += 1
+
+        matches = sum(1 for i in range(26) if win[i] == need[i])
+        res = []
+        if matches == 26:
+            res.append(0)
+
+        for r in range(m, n):
+            in_i = idx(s[r])
+            out_i = idx(s[r-m])
+
+            before_in_equal = (win[in_i] == need[in_i])
+            win[in_i] += 1
+            after_in_equal  = (win[in_i] == need[in_i])
+            if before_in_equal != after_in_equal:
+                matches += 1 if after_in_equal else -1
+
+            before_out_equal = (win[out_i] == need[out_i])
+            win[out_i] -= 1
+            after_out_equal  = (win[out_i] == need[out_i])
+            if before_out_equal != after_out_equal:
+                matches += 1 if after_out_equal else -1
+
+            if matches == 26:
+                res.append(r - m + 1)
+
+        return res
+#############################################################################
