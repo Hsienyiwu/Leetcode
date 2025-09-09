@@ -69,7 +69,7 @@ class Solution:
         win  = [0]*26
         for c in p:
             need[idx(c)] += 1
-
+        #先吃前m個
         for i in range(m):
             win[idx(s[i])] += 1
 
@@ -81,13 +81,13 @@ class Solution:
         for r in range(m, n):
             in_i = idx(s[r])
             out_i = idx(s[r-m])
-
+            #右進 : 更新matches前先看是否原本相等
             before_in_equal = (win[in_i] == need[in_i])
             win[in_i] += 1
             after_in_equal  = (win[in_i] == need[in_i])
             if before_in_equal != after_in_equal:
                 matches += 1 if after_in_equal else -1
-
+            #左出
             before_out_equal = (win[out_i] == need[out_i])
             win[out_i] -= 1
             after_out_equal  = (win[out_i] == need[out_i])
