@@ -1,0 +1,29 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        if not nums or k <= 0:
+            return []
+        if k == 1:
+            return nums[:]  # 每窗只有自己
+
+        dq = deque()      # 存「索引」，對應值嚴格遞減
+        res = []
+
+        for right, x in enumerate(nums):
+            # 1) 清尾：維持嚴格遞減（小或相等的都沒資格當最大）
+            while dq and nums[dq[-1]] <= x:
+                dq.pop()
+            dq.append(right)
+
+            left = right - k + 1  # 當前窗口左界
+
+            # 2) 清首：隊首若已滑出窗口，丟掉
+            if dq[0] < left:
+                dq.popleft()
+
+            # 3) 收答案：窗口長度達到 k 才有輸出
+            if left >= 0:
+                res.append(nums[dq[0]])
+        return res
