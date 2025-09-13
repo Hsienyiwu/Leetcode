@@ -32,6 +32,30 @@ print(Solution().maxSlidingWindow([1,3,1,2,0,5], 3))        # [3,3,2,5]
 
 ################################################################################
 
+###heap解法，知道就好###
+import heapq
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        # Python 預設是 min-heap，所以存 (-值, index)
+        heap = []
+
+        for i, num in enumerate(nums):
+            # 推入新元素
+            heapq.heappush(heap, (-num, i))
+
+            # 當窗口滿足長度 k
+            if i >= k - 1:
+                # 把超出窗口範圍的元素丟掉
+                while heap[0][1] <= i - k:
+                    heapq.heappop(heap)
+                # 堆頂就是最大值
+                res.append(-heap[0][0])
+
+        return res
+
+
             # 3) 收答案：窗口長度達到 k 才有輸出
             if left >= 0:
                 res.append(nums[dq[0]])
