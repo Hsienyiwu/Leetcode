@@ -3,10 +3,10 @@ from typing import List
 
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        if not nums or k <= 0:
+        if not nums or k <= 0:  #邊界條件(空輸入 或 不合法輸入)
             return []
-        if k == 1:
-            return nums[:]  # 每窗只有自己
+        if k == 1:              #優先條件(最小合法輸入)
+            return nums[:]  # 每窗只有自己，直接返回原陣列，省掉主演算法
 
         dq = deque()      # 存「索引」，對應值嚴格遞減
         res = []
