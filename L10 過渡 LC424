@@ -1,0 +1,25 @@
+###09/09/25 start , 09/11/25補充###
+
+from collections import defaultdict
+
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        count = defaultdict(int)
+        left = 0
+        max_freq = 0
+        ans = 0
+
+        for right, ch in enumerate(s):
+            count[ch] += 1
+            # 追蹤窗口內「出現最多的字母次數」
+            if count[ch] > max_freq:
+                max_freq = count[ch]
+
+            # 需要替換的數量 > k 就縮左
+            while (right - left + 1) - max_freq > k:
+                count[s[left]] -= 1
+                left += 1
+
+            # 窗口長度
+            ans = max(ans, right - left + 1)
+        return ans
