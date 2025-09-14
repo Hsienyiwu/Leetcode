@@ -1,0 +1,38 @@
+from collections import Counter
+
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        if not s or not words: return []
+        
+        word_len = len(words[0])
+        total_len = word_len * len(words)
+        need = Counter(words)
+        res = []
+        
+        # 對齊方式：0..word_len-1
+        for offset in range(word_len):
+            left = offset
+            window = Counter()
+            count = 0
+            
+            # 每次往右走一個單詞
+            for right in range(offset, len(s)-word_len+1, word_len):
+                w = s[right:right+word_len]
+                if w in need:
+                    window[w] += 1
+                    count += 1
+                    # 超額就縮左
+                    while window[w] > need[w]:
+                        left_word = s[left:left+word_len]
+                        window[left_word] -= 1
+                        left += word_len
+                        count -= 1
+                    # 命中
+                    if count == len(words):
+                        res.append(left)
+                else:
+                    # reset
+                    window.clear()
+                    count = 0
+                    left = right + word_len
+        return res
