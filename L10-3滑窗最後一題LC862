@@ -1,0 +1,27 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def shortestSubarray(self, nums: List[int], k: int) -> int:
+        n = len(nums)
+        # 前綴和：P[0] = 0，P[i] = nums[0..i-1]
+        P = [0] * (n + 1)
+        for i in range(n):
+            P[i + 1] = P[i] + nums[i]
+
+        ans = n + 1
+        dq = deque()  # 存放索引j，使 P[j] 嚴格遞增
+
+        for i in range(n + 1):
+            # 1) 嘗試用隊首縮左邊界：P[i] - P[dq[0]] >= K
+            while dq and P[i] - P[dq[0]] >= k:
+                ans = min(ans, i - dq[0])
+                dq.popleft()
+
+            # 2) 維持遞增性：把所有 >= P[i] 的尾巴彈掉
+            while dq and P[dq[-1]] >= P[i]:
+                dq.pop()
+
+            dq.append(i)
+
+        return ans if ans <= n else -1
