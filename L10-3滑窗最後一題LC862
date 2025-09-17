@@ -4,24 +4,38 @@ from typing import List
 class Solution:
     def shortestSubarray(self, nums: List[int], k: int) -> int:
         n = len(nums)
-        # 前綴和：P[0] = 0，P[i] = nums[0..i-1]
+
+        # --- 前綴和 ---
+        # 定義：P[0] = 0，P[i] = nums[0..i-1] 的總和
+        # 子陣列 nums[l..r] 的和 = P[r+1] - P[l]
         P = [0] * (n + 1)
         for i in range(n):
+            # 更新前綴和：P[i+1] 表示「前 i+1 個元素的總和」
             P[i + 1] = P[i] + nums[i]
 
+        # 初始答案設為不可能的大值（> n），最後若保持不變就回傳 -1
         ans = n + 1
-        dq = deque()  # 存放索引j，使 P[j] 嚴格遞增
 
+        # 單調遞增 deque，裡面存的是前綴和的索引 j
+        # 維持性質：P[dq[0]] < P[dq[1]] < ... < P[dq[-1]]
+        dq = deque()
+
+        # 逐一掃描每個 i（代表右端 r+1）
         for i in range(n + 1):
-            # 1) 嘗試用隊首縮左邊界：P[i] - P[dq[0]] >= K
+            # Step 1) 嘗試用隊首縮左邊界（找最短長度）
+            # 條件：P[i] - P[dq[0]] >= k 代表在 dq[0]..i-1 的子陣列已達標
+            # 因為 dq[0] 是最左的候選，一旦達標就更新答案並彈掉它（繼續找更短）
             while dq and P[i] - P[dq[0]] >= k:
                 ans = min(ans, i - dq[0])
                 dq.popleft()
 
-            # 2) 維持遞增性：把所有 >= P[i] 的尾巴彈掉
+            # Step 2) 維持 deque 的嚴格遞增性
+            # 若 P[dq[-1]] >= P[i]，則 dq[-1] 永遠不會比 i 更好（更大且更左，未來只會更差），可丟
             while dq and P[dq[-1]] >= P[i]:
                 dq.pop()
 
+            # Step 3) 推入當前索引 i 當作未來的左邊界候選
             dq.append(i)
 
         return ans if ans <= n else -1
+
