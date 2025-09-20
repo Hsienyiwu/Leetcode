@@ -1,0 +1,24 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def findMaxValueOfEquation(self, points: List[List[int]], k: int) -> int:
+        dq = deque()  # 存 pair: (y - x, x)
+        ans = float('-inf')
+
+        for x, y in points:
+            # 1) 移除窗口外元素 (x - x_i > k)
+            while dq and x - dq[0][1] > k:
+                dq.popleft()
+
+            # 2) 如果 deque 不空，可以更新答案
+            if dq:
+                ans = max(ans, y + x + dq[0][0])
+
+            # 3) 插入當前點 (y - x, x)，並保持遞減
+            cur = y - x
+            while dq and dq[-1][0] <= cur:
+                dq.pop()
+            dq.append((cur, x))
+
+        return ans
