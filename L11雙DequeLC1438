@@ -1,0 +1,33 @@
+from collections import deque
+from typing import List
+
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        maxdq = deque()  # indices; values decreasing
+        mindq = deque()  # indices; values increasing
+        left = 0
+        ans = 0
+
+        for right, x in enumerate(nums):
+            # push to maxdq: keep decreasing
+            while maxdq and nums[maxdq[-1]] < x:
+                maxdq.pop()
+            maxdq.append(right)
+
+            # push to mindq: keep increasing
+            while mindq and nums[mindq[-1]] > x:
+                mindq.pop()
+            mindq.append(right)
+
+            # shrink while violates limit
+            while nums[maxdq[0]] - nums[mindq[0]] > limit:
+                if maxdq[0] == left:
+                    maxdq.popleft()
+                if mindq[0] == left:
+                    mindq.popleft()
+                left += 1
+
+            # update answer
+            ans = max(ans, right - left + 1)
+
+        return ans
