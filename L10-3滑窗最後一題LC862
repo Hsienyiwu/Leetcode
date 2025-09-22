@@ -39,3 +39,34 @@ class Solution:
 
         return ans if ans <= n else -1
 
+#######################################################################################################
+2025/09/22更新 : 
+from collections import deque
+from typing import List
+
+def shortestSubarray(nums: List[int], k: int) -> int:
+    # 口訣：前綴和 + 單調遞增 deque（存索引）
+    n = len(nums)
+    pre = [0] * (n + 1)                 # pre[i] = nums[0..i-1] 之和
+    for i in range(1, n + 1):
+        pre[i] = pre[i - 1] + nums[i - 1]
+
+    dq = deque()                        # 存的是 pre 的「索引」，且 pre[索引] 嚴格遞增
+    ans = float('inf')
+
+    for j in range(n + 1):              # j 當作子陣列右端點（對應 pre[j]）
+        # 1) 能達標就「彈頭」：用最舊、最小的 pre 盡量縮短長度
+        while dq and pre[j] - pre[dq[0]] >= k:
+            ans = min(ans, j - dq[0])
+            dq.popleft()
+
+        # 2) 維持單調就「彈尾」：確保 pre 值嚴格遞增（新的更小/更優就取代舊的）
+        while dq and pre[j] <= pre[dq[-1]]:
+            dq.pop()
+
+        # 3) 壓入目前索引
+        dq.append(j)
+
+    return -1 if ans == float('inf') else ans
+
+
