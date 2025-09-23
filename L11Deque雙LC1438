@@ -31,3 +31,42 @@ class Solution:
             ans = max(ans, right - left + 1)
 
         return ans
+
+#########################################################################
+
+from collections import deque
+from typing import List
+
+def longestSubarray(nums: List[int], limit: int) -> int:
+    # 口訣：先更新兩 deque → 檢查違規就收縮 → 更新答案
+    maxdq = deque()  # 單調遞減：存索引，隊首是當前窗口最大值的索引
+    mindq = deque()  # 單調遞增：存索引，隊首是當前窗口最小值的索引
+
+    left = 0
+    ans = 0
+
+    for right, x in enumerate(nums):
+        # 更新 maxdq：把尾端比 x 小的通通彈掉，維持遞減
+        while maxdq and nums[maxdq[-1]] < x:
+            maxdq.pop()
+        maxdq.append(right)
+
+        # 更新 mindq：把尾端比 x 大的通通彈掉，維持遞增
+        while mindq and nums[mindq[-1]] > x:
+            mindq.pop()
+        mindq.append(right)
+
+        # 若窗口違規（最大 - 最小 > limit），就收縮左邊直到合規
+        while nums[maxdq[0]] - nums[mindq[0]] > limit:
+            # 左指針越界就同步彈頭
+            if maxdq[0] == left:
+                maxdq.popleft()
+            if mindq[0] == left:
+                mindq.popleft()
+            left += 1
+
+        # 更新答案（當前合法窗口長度）
+        ans = max(ans, right - left + 1)
+
+    return ans
+
