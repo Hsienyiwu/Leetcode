@@ -1,0 +1,44 @@
+###解法一(參考)####
+from typing import List
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        best_end = ans = nums[0]
+        for x in nums[1:]:
+            best_end = max(x, best_end + x)
+            ans = max(ans, best_end)
+        return ans
+###解法二:程式骨架###
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        cur_sum = 0
+        max_sum = nums[0]
+        for n in nums:
+            cur_sum = max(n, cur_sum + n)   # 要嘛自己開新段，要嘛延續
+            max_sum = max(max_sum, cur_sum) # 更新全域最佳
+        return max_sum
+
+#########################################################################
+哈哈 😆 正常啦～LC53 本來就是 母題 + 教科書級範例，一挖就會牽出：
+
+DP 入門
+
+貪心對照
+
+延伸題 (918/152/1425)
+
+初始化差異 (A/B)
+
+索引版 trace
+
+📌 這些筆記其實就是「基石」，熟了之後後面很多題目都能用這套去類比。
+
+先不用急著全部抄完，你可以：
+
+把 主幹 (Kadane 公式 + max/min 更新) 抄熟。
+
+旁邊加一個小註：「延伸 → 918 / 152 / 1425」。
+
+其他細節（DP vs 貪心對照、索引 trace）留作補充。
+
+這樣筆記就不會爆炸，但又有完整結構。
