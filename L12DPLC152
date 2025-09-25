@@ -1,0 +1,58 @@
+###寫法一：標準 DP 雙狀態---含註解的程式碼###
+class Solution:
+    def maxProduct(self, nums):
+        # 初始化：
+        # max_prod：目前位置結束時的最大乘積
+        # min_prod：目前位置結束時的最小乘積（因為負數可能翻轉成最大）
+        # ans：全域最大值
+        max_prod = min_prod = ans = nums[0]
+
+        # 從第二個元素開始往右掃
+        for n in nums[1:]:
+            # 先存舊的 max_prod，因為更新 min_prod 也需要用到
+            temp = max_prod
+
+            # 目前最大值可能有三種來源：
+            # 1. 單獨開新 subarray（n）
+            # 2. 接在之前的最大積後面（max_prod * n）
+            # 3. 接在之前的最小積後面（min_prod * n，因為負數翻轉成最大）
+            max_prod = max(n, n * max_prod, n * min_prod)
+
+            # 同理，最小值也要更新，三種可能：
+            # 1. 單獨開新 subarray（n）
+            # 2. 接在舊的最大積後面（temp * n，這裡用舊值避免被剛更新的 max_prod 影響）
+            # 3. 接在之前的最小積後面（min_prod * n）
+            min_prod = min(n, n * temp, n * min_prod)
+
+            # 更新全域最大值
+            ans = max(ans, max_prod)
+
+        return ans
+###寫法二：前綴乘積（左右掃描法）#####################################################
+
+透過「乘積可能被 0 打斷」的特性，直接掃兩次：
+
+從左到右計算 prefix product，遇到 0 重置。
+
+從右到左再掃一次，避免單邊被負數抵銷。
+
+class Solution:
+    def maxProduct(self, nums):
+        ans = nums[0]
+        prefix = 1
+        # 左往右掃
+        for n in nums:
+            prefix *= n
+            ans = max(ans, prefix)
+            if prefix == 0:  # 被 0 打斷，重置
+                prefix = 1
+        # 右往左掃
+        prefix = 1
+        for n in nums[::-1]:
+            prefix *= n
+            ans = max(ans, prefix)
+            if prefix == 0:
+                prefix = 1
+        return ans
+##################################################################################
+
