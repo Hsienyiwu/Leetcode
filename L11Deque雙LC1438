@@ -70,3 +70,53 @@ def longestSubarray(nums: List[int], limit: int) -> int:
 
     return ans
 
+############################################################################################################
+LC1438《Longest Continuous Subarray With Absolute Diff ≤ Limit》是滑窗 + 單調 deque 的經典題。簡答模式快速回顧：
+
+思路摘要
+
+題意：找最長子陣列，使得 max - min ≤ limit。
+
+解法核心：滑動窗口維持當前區間內的最大值、最小值。
+
+資料結構：兩個單調 deque
+
+maxdq：單調遞減 → 頭是最大值
+
+mindq：單調遞增 → 頭是最小值
+--------------------------------------------------------------------------------------------------------------
+步驟模板
+from collections import deque
+
+def longestSubarray(nums, limit):
+    maxdq, mindq = deque(), deque()
+    left = 0
+    ans = 0
+    for right, x in enumerate(nums):
+        # 維持單調性
+        while maxdq and x > maxdq[-1]:
+            maxdq.pop()
+        while mindq and x < mindq[-1]:
+            mindq.pop()
+        maxdq.append(x)
+        mindq.append(x)
+
+        # 檢查條件
+        while maxdq[0] - mindq[0] > limit:
+            if nums[left] == maxdq[0]:
+                maxdq.popleft()
+            if nums[left] == mindq[0]:
+                mindq.popleft()
+            left += 1
+
+        ans = max(ans, right - left + 1)
+    return ans
+-------------------------------------------------------------------------------------------------------------------------
+心法
+
+規則：窗口只收縮到條件再次成立為止。
+
+對稱：最大最小兩條 deque 同步維護。
+
+模板：while max-min>limit: shrink left。
+
