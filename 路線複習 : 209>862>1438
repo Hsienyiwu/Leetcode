@@ -1,0 +1,90 @@
+收到！這條主線我幫你做成「極簡口訣 + 模板 + 易錯點」版，直接背、直接抄。
+-----------------------------------------------------------------
+① LC209（正數滑窗）
+
+口訣：右擴加總、左縮求短；全正數必可單調縮。
+def minSubArrayLen(target, nums):
+    left = total = 0
+    ans = float('inf')
+    for right, x in enumerate(nums):
+        total += x
+        while total >= target:
+            ans = min(ans, right - left + 1)
+            total -= nums[left]; left += 1
+    return 0 if ans == float('inf') else ans
+易錯：用在含負數會壞；答案不存在要回 0。
+------------------------------------------------------------------
+② LC862（含負數 → 前綴和 + 單調Deque）
+
+目標：最短長度使 prefix[j]-prefix[i] >= k（j > i）。
+口訣：
+
+先去尾：當前 prefix[j] <= deque尾prefix → 尾巴出隊（維持遞增）。
+
+再取頭：當前 prefix[j] - deque頭prefix >= k → 更新答案、頭出隊（縮短）。
+from collections import deque
+
+def shortestSubarray(nums, k):
+    pre = [0]
+    for x in nums: pre.append(pre[-1] + x)
+    dq = deque()   # 存索引，pre遞增
+    ans = float('inf')
+    for j, pj in enumerate(pre):
+        while dq and pj <= pre[dq[-1]]: dq.pop()          # 去尾
+        while dq and pj - pre[dq[0]] >= k:                # 取頭
+            ans = min(ans, j - dq[0]); dq.popleft()
+        dq.append(j)
+    return -1 if ans == float('inf') else ans
+易錯：順序別反；pre 需遞增；答案不存在回 -1。
+-------------------------------------------------------------------
+③ LC1438（窗口內 |max-min| ≤ limit）
+
+策略：維持兩個單調隊列：maxdq（遞增存索引、取末得最大？→常用「遞減」存值）、mindq（遞增）。
+口訣：
+
+右擴：把 nums[right] 插入並去尾保持單調。
+
+若違規（max - min > limit）就左縮，同步清理落在 left 左邊的索引。
+from collections import deque
+
+def longestSubarray(nums, limit):
+    maxdq, mindq = deque(), deque()
+    left = ans = 0
+    for right, x in enumerate(nums):
+        while maxdq and nums[maxdq[-1]] < x: maxdq.pop()
+        while mindq and nums[mindq[-1]] > x: mindq.pop()
+        maxdq.append(right); mindq.append(right)
+        while nums[maxdq[0]] - nums[mindq[0]] > limit:
+            if maxdq[0] == left: maxdq.popleft()
+            if mindq[0] == left: mindq.popleft()
+            left += 1
+        ans = max(ans, right - left + 1)
+    return ans
+易錯：隊列放「索引」非值；兩條隊列同時維護。
+---------------------------------------------------------------------------------------
+三題串起來的「心法遞進」
+
+LC209：全正 → 純滑窗「雙指針」。
+
+LC862：有負 → 滑窗失效 → 改「前綴和 + 單調遞增 deque」。
+
+LC1438：約束在窗口 → 兩條單調 deque 即時維護 max/min。
+--------------------------------------------------------------------------------------
+5 分鐘速練（建議）
+
+1. 抄三段模板到你的 LC 小抄。
+
+2. 空白推演一遍：手寫 5 步「去尾/取頭」的條件（862）與「違規左縮」流程（1438）。
+
+3. 做各題各 1 次變體：
+
+    *209：變成「≤ target 的最長」怎麼改？
+
+    *862：把 k 改成 > 或 >= 有差嗎？測邊界 k=0。
+
+    *1438：把條件換成「max-min < limit」要怎麼調 while？
+########################################################################################################
+
+這條線（209→862→1438）正是「滑窗→單調隊列→雙隊列」的進階主幹。你現在只要多做「手推」和「口訣默寫」就能內化。
+
+等你209與862都能閉眼寫出 while 條件時，再回頭看 1438 的「雙 while／雙 deque」就會非常順。
