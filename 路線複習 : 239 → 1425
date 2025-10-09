@@ -1,0 +1,25 @@
+239 → 1425
+
+@239 打基礎 → 1425 把「單調隊列＝滑動窗口最大值維護器」升級到 DP 場景。
+###################################################################
+LC1425 Constrained Subsequence Sum（DP＋單調隊列）
+
+題意：選子序列（非連續），相鄰選取距離 ≤ k，最大總和。
+轉移：dp[i] = nums[i] + max(0, max(dp[j]) for i-k ≤ j < i)
+心法：維持dp 的滑動窗口最大值的 deque（值遞增彈出）。
+複雜度：O(n)。
+--------------------------------------------------------------------
+from collections import deque
+def constrainedSubsetSum(nums, k):
+    dq=deque()  # 存 dp 值的索引，保持 dp 降序
+    n=len(nums); dp=[0]*n; ans=float('-inf')
+    for i,x in enumerate(nums):
+        best = dp[dq[0]] if dq else 0
+        dp[i] = x + max(0, best)
+        ans = max(ans, dp[i])
+        while dq and dp[dq[-1]] <= dp[i]: dq.pop()
+        dq.append(i)
+        if dq[0] == i-k: dq.popleft()
+    return ans
+----------------------------------------------------------------------
+坑：窗口是「索引距離 ≤ k」；允許全部不取的情況由 max(0, ...) 處理。
