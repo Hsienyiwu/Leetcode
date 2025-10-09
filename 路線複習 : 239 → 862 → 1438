@@ -1,0 +1,76 @@
+239 → 862 → 1438
+
+@239：把「索引＋單調性」吃乾抹淨。
+
+@862/1438：套到更複雜條件。
+
+LC239 Sliding Window Maximum（單調隊列經典）
+
+題意：每個長度 k 視窗最大值。
+心法：維持值降序的索引 deque；右側進入前把比它小的都彈出；左界越界就彈左端。
+複雜度：O(n)。
+---------------------------------------------------------------------
+from collections import deque
+def maxSlidingWindow(nums, k):
+    dq=deque(); res=[]
+    for i,x in enumerate(nums):
+        while dq and nums[dq[-1]]<=x: dq.pop()
+        dq.append(i)
+        if dq[0]==i-k: dq.popleft()
+        if i>=k-1: res.append(nums[dq[0]])
+    return res
+----------------------------------------------------------------------
+坑：等號用 <= 才能去掉相同值過期的舊索引。
+
+#######################################################################
+LC862 Shortest Subarray with Sum ≥ K（前綴和＋單調隊列）
+
+題意：最短長度，使連續子陣列和 ≥ K；數字可負。
+心法：P[i] 前綴和，想找最小 i-j 使 P[i]-P[j]≥K。維持前綴和單調遞增的索引 deque。
+兩步規則：
+
+當 P[i] - P[deque[0]] ≥ K → 更新答案並彈出左端（能解）。
+
+維持遞增：當 P[i] ≤ P[deque[-1]] → 彈出右端（更優 j）。
+複雜度：O(n)。
+
+from collections import deque
+def shortestSubarray(nums, K):
+    n=len(nums)
+    P=[0]*(n+1)
+    for i,x in enumerate(nums,1): P[i]=P[i-1]+x
+    dq=deque(); ans=float('inf')
+    for i in range(n+1):
+        while dq and P[i]-P[dq[0]]>=K:
+            ans=min(ans, i-dq.popleft())
+        while dq and P[i]<=P[dq[-1]]:  # 維持遞增
+            dq.pop()
+        dq.append(i)
+    return -1 if ans==float('inf') else ans
+坑：允許負數→不能用普通滑窗；答案無解回 -1。
+##################################################################################
+LC1438 Longest Continuous Subarray With Abs Diff ≤ Limit（雙單調隊列）
+
+題意：找最長長度，窗口內 max-min ≤ limit。
+心法：滑窗＋兩個 deque：一個降序存最大值索引、一個升序存最小值索引。若超限就左縮。
+複雜度：O(n)。
+
+from collections import deque
+def longestSubarray(nums, limit):
+    maxdq=deque()  # 存索引，對應值遞增彈出（保持降序）
+    mindq=deque()  # 存索引，對應值遞減彈出（保持升序）
+    l=0; ans=0
+    for r,x in enumerate(nums):
+        while maxdq and nums[maxdq[-1]]<x: maxdq.pop()
+        maxdq.append(r)
+        while mindq and nums[mindq[-1]]>x: mindq.pop()
+        mindq.append(r)
+        while nums[maxdq[0]]-nums[mindq[0]]>limit:
+            if maxdq[0]==l: maxdq.popleft()
+            if mindq[0]==l: mindq.popleft()
+            l+=1
+        ans=max(ans, r-l+1)
+    return ans
+
+坑：隊列放索引、出界時要同步彈頭；> 不要寫成 >=。
+
