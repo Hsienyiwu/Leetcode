@@ -1,0 +1,7 @@
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+
+rf = RandomForestClassifier(n_estimators=100, max_depth=5)
+gb = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)
+
+rf.fit(X_train, y_train)
+gb.fit(X_train, y_train)
