@@ -1,0 +1,21 @@
+(1) 特徵建立 (Feature Creation)
+df['ctr'] = df['clicks'] / df['impressions']
+df['month'] = df['date'].dt.month
+
+(2) 特徵轉換 (Feature Transformation)
+import numpy as np
+df['log_income'] = np.log1p(df['income'])
+
+(3) 特徵編碼 (Feature Encoding)
+(4) 特徵選擇 (Feature Selection)
+from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
+
+sel = SelectFromModel(RandomForestClassifier(n_estimators=100))
+sel.fit(X, y)
+X_new = sel.transform(X)
+
+(5) 特徵降維 (Feature Reduction)
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
