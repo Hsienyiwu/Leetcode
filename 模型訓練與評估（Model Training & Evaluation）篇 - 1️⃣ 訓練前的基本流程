@@ -1,0 +1,13 @@
+1. 分訓練集／測試集
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+2.模型初始化
+from sklearn.ensemble import RandomForestClassifier
+model = RandomForestClassifier(n_estimators=100)
+
+3.模型訓練
+model.fit(X_train, y_train)
+
+4.模型預測
+y_pred = model.predict(X_test)
