@@ -1,0 +1,31 @@
+(1) 使用 Flask / FastAPI 架設 API
+from fastapi import FastAPI
+import joblib
+
+app = FastAPI()
+model = joblib.load('model.pkl')
+
+@app.post("/predict")
+def predict(data: dict):
+    X = [data['feature1'], data['feature2']]
+    y_pred = model.predict([X])
+    return {"prediction": y_pred.tolist()}
+
+啟動後 → curl 或前端即可呼叫
+
+curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -d '{"feature1": 3, "feature2": 7}'
+
+(2) Streamlit / Gradio：快速建立互動介面
+import streamlit as st
+import joblib
+
+model = joblib.load('model.pkl')
+
+x1 = st.number_input('Feature 1')
+x2 = st.number_input('Feature 2')
+if st.button('Predict'):
+    pred = model.predict([[x1, x2]])
+    st.write('Prediction:', pred[0])
+
+👉 適合 Demo、內部展示或教育用途。
+
