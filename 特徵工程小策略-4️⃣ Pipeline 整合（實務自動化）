@@ -1,0 +1,19 @@
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+numeric_features = ['age', 'income']
+numeric_transformer = StandardScaler()
+
+categorical_features = ['gender', 'city']
+categorical_transformer = OneHotEncoder(handle_unknown='ignore')
+
+preprocess = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+model = Pipeline(steps=[('preprocess', preprocess),
+                        ('classifier', RandomForestClassifier())])
+model.fit(X_train, y_train)
