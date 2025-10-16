@@ -1,0 +1,67 @@
+Step 1️⃣：CI — 自動訓練與測試
+
+建立 .github/workflows/train.yml：
+
+name: Train and Log Model
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Train model and log to MLflow
+      run: python train.py
+
+✅ 每次提交程式碼即會自動重新訓練、紀錄模型。
+
+Step 2️⃣：CD — 自動部署
+
+接續 .github/workflows/deploy.yml：
+name: Deploy Model via Docker
+
+on:
+  workflow_run:
+    workflows: ["Train and Log Model"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker image
+      run: docker build -t iris-mlflow:${{ github.sha }} .
+    - name: Push to Docker Hub
+      run: |
+        echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+        docker push iris-mlflow:${{ github.sha }}
+🔸 當模型訓練完成後，自動打包新容器並上傳。
+
+Step 3️⃣：CT — 自動再訓練排程
+
+使用 Airflow 或 Prefect 週期性執行 retrain：
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime
+import retrain_pipeline
+
+with DAG("retrain_ml_model",
+         start_date=datetime(2025,10,1),
+         schedule_interval="@weekly",
+         catchup=False) as dag:
+    retrain = PythonOperator(
+        task_id="retrain_model",
+        python_callable=retrain_pipeline.run
+    )
+✅ 定期偵測資料漂移後，自動觸發 retrain + re-deploy。
