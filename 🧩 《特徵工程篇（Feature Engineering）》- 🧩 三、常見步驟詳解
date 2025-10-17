@@ -1,0 +1,29 @@
+🧩 《特徵工程篇（Feature Engineering）》
+🧩 三、常見步驟詳解
+1️⃣ 缺值處理
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(strategy='mean')
+X = imputer.fit_transform(X)
+
+2️⃣ 特徵標準化（Normalization / Scaling）
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+3️⃣ 類別編碼（Categorical Encoding）
+from sklearn.preprocessing import OneHotEncoder
+encoder = OneHotEncoder(sparse_output=False)
+X_encoded = encoder.fit_transform(X_cat)
+
+4️⃣ 特徵選擇（Feature Selection）
+from sklearn.feature_selection import SelectKBest, f_classif
+selector = SelectKBest(score_func=f_classif, k=5)
+X_selected = selector.fit_transform(X, y)
+
+5️⃣ 特徵構造（Feature Construction）
+X['income_per_age'] = X['income'] / X['age']
+
+6️⃣ 降維（Dimensionality Reduction）
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
