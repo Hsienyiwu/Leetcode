@@ -1,0 +1,12 @@
+# 啟動 MLflow 伺服器
+mlflow ui
+
+# 設定追蹤參數
+mlflow.start_run()
+mlflow.log_param("alpha", 0.5)
+mlflow.log_metric("rmse", 0.23)
+mlflow.log_artifact("model.pkl")
+mlflow.end_run()
+
+模型註冊
+mlflow.register_model("runs:/<run_id>/model", "MyModel")
