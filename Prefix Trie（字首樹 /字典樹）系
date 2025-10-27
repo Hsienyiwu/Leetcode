@@ -1,0 +1,15 @@
+📘 整理如下：
+
+題號	類型	主題	關鍵結構	備註
+LC14 – Longest Common Prefix	字串處理	比對最長共同字首	可用排序或逐字比對	不需資料結構
+LC208 – Implement Trie (Prefix Tree)	資料結構	字典樹實作	TrieNode（dict + isEnd）	Prefix 類代表題
+
+🧩 口訣：
+
+「14 比對前綴，208 建前綴樹。」
+
+所以：
+
+LC239 / 862 / 1499 / 1425 → 🌀Deque
+
+LC14 / 208 → 🌲Prefix Tree（字典樹）
