@@ -1,0 +1,69 @@
+🧩《全課程全 Glossary：縮寫精華版（只保留考試會考）》
+
+（依照實際考試熱門度排列）
+
+🔥 一、核心國際認證（最常被問、最常考）
+縮寫	重點功能（考試會記）
+Security+（Sec+）	入門安全證照：威脅、風險、網路安全、加密、IAM。
+Network+（Net+）	網路技術基礎：TCP/IP、Routing、Switching、安全概念。
+A+	IT 技術基礎：Troubleshooting、OS、硬體。
+CISSP	安全管理頂級證照：八大領域（風險管理、網路安全、工程、開發安全…）。
+SSCP	資安基礎執行級：Access Control、Ops、Notice、Comm。
+CC（Certified in Cybersecurity）	(ISC)² 入門證照：Access Control、網路安全、風險識別。
+CCSP	雲端安全：雲架構、雲安全治理、維運。
+CEH	合法駭客：攻擊手法、弱點利用。
+CySA+	資安分析、事件回應、威脅偵測。
+Pentest+	滲透測試流程、弱點掃描、報告撰寫。
+🔥 二、風險/稽核／合規（高需求）
+縮寫	重點功能
+CISA	資訊系統稽核：Control、監控、評估。
+CRISC	風險管理：識別、評估、緩解。
+CGRC	企業 IT 風險與合規治理。
+CISM（課程無提，但常搭 CISSP）	管理階層安全治理（補充）。
+PCIP	支付卡 PCI 安全合規。
+CDPSE	Privacy 工程（資料隱私設計）。
+CRCM / CERP	金融合規與風險（較特定領域）。
+🔥 三、GIAC 常見證照（考試會遇到縮寫）
+
+（GIAC 以偏實作聞名）
+
+縮寫	重點功能
+GCED	企業防禦、事件處理、關鍵控制。
+GCIA	網路流量分析、IDS、協定解析。
+GX-IH	事件處理。
+GX-FA	進階鑑識、威脅狩獵。
+GLEG	法務、資料安全、調查程序。
+GICSP	工控系統資安。
+GCIP	關鍵基礎設施保護。
+🔥 四、資安核心技術名詞（考試常出現）
+名詞	考點
+Vulnerability（弱點）	系統可被攻擊的破口。
+Threat（威脅）	想要利用弱點的行為者或情境。
+Risk（風險）	Threat × Vulnerability 造成損失的可能性。
+Firewall	控制進出流量。
+Encryption / Encryption Protocols	保密性；TLS、AES、RSA。
+Incident Response	辨識、控制、消除、回復。
+Access Control / IAM	身分識別與權限管理。
+Compliance	遵守政策、法規。
+Vulnerability Management	掃描 → 評分 → 修補。
+Threat Management	偵測威脅與回應。
+🔥 五、基礎 IT（考題必出）
+名詞	考點
+Operating Systems	Windows / Linux 基本管理。
+File Systems	NTFS、EXT4。
+Database skills	Schema、權限控管、SQL 基礎。
+Memory Management	OS 如何管理記憶體。
+User Permissions / Roles	ACL、RBAC。
+System Analysis	系統功能流程、安全架構。
+🔥 六、資安角色（面試常問）
+名詞	考點
+Cybersecurity Analyst	事件偵測＋回應＋報告。
+Cybersecurity Engineer	架構設計與部署。
+Security Architect	系統整體安全藍圖。
+Incident Handler	處理攻擊事件。
+Penetration Tester	滲透測試、弱點評估。
+IT Auditor	系統審查、控制評估。
+⭐ 一句話總結（最濃縮）
+
+這份縮寫表＝「考試會考＋面試會問＋業界會用」的最小必要集。
+你要抄筆記、要做速查表、要準備證照，都可以直接靠這份。
