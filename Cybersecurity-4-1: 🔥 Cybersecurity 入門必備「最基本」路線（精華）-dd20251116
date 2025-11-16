@@ -1,0 +1,131 @@
+🔥 Cybersecurity 入門必備「最基本」路線（精華）
+① IT Fundamentals（最基礎的基礎）
+
+這是所有資安工作的底層：
+
+Windows / Linux 基本操作
+
+Terminal 指令
+
+File Systems & Permissions
+
+OS 基礎：memory / process / user roles
+
+Network 基礎：IP / DNS / TCP/UDP / routing / firewall
+
+✔ 初學者的首要重點：Network + Linux 基礎
+
+② Security Fundamentals（資安基礎概念）
+
+CIA Triad（Confidentiality / Integrity / Availability）
+
+Authentication / Authorization
+
+Access Controls
+
+Malware 類型
+
+Logs & Monitoring
+
+Incident Response Lifecycle
+
+✔ 對應入門證照：Security+、ISC2 CC
+
+③ Basic Tools（必會工具，不需要太難）
+
+Wireshark（封包分析）
+
+Splunk / SIEM（配置 or 讀 logs 就夠）
+
+Nmap（端口掃描）
+
+Burp Suite（web測試工具）
+
+✔ 入門者只要：Wireshark + Nmap 能用就很強。
+
+④ 從最常見的入門職位開始準備
+
+入門者最常拿到的角色：
+
+SOC Analyst (L1)
+
+IT Support → Security Track
+
+Junior Cybersecurity Analyst
+
+Risk & Compliance 初階
+
+✔ SOC 是最快「真正進資安領域」的方式。
+
+⑤ 從最基本的認證開始
+
+第一張最推薦：Security+ 或 ISC2 CC
+
+Security+ → 基礎完整
+
+ISC2 CC → 免費、入門友好
+
+之後才會走：CySA+、CEH、SSCP、CISSP（未來）
+
+✔ 你現在階段：Security+ / CC → 最對的起步
+
+⑥ 找職缺 → 分析 gap → 補強（這就是 Final Project 的精神）
+
+從簡單職缺開始，例如：
+
+“Junior Cybersecurity Analyst (Entry-Level)”
+“SOC Analyst I”
+“IT Security Assistant”
+
+這些通常要求：
+
+必備	說明
+Basic IT knowledge	Windows/Linux/Network
+Understanding of Security basics	CIA、access control、threat types
+Any entry-level cert	Sec+、CC、Network+
+Willing to learn	最重要的條件
+
+你只需要補強：
+
+Network 基礎
+
+Linux 基礎
+
+Security fundamental
+
+1 張入門證照
+
+一點 log/analyze 能力
+
+就能開始投履歷。
+
+✨ 最簡單的 0→1 起步建議（直接照做就能站穩）
+Step A — 同步學 3 科（每天 30–60 分鐘）
+
+Network 基礎
+
+Linux operation 基礎
+
+Security Fundamentals
+
+Step B — 一張入門證照
+
+Security+（最完整） 或
+
+ISC2 CC（免費又入門）
+
+Step C — 做一份「個人 lab」
+
+例如：
+
+用 Wireshark 抓封包
+
+用 Nmap 掃自己主機
+
+用 Windows Event Viewer 做 log 分析
+
+做 1 個 “Incident Response 流程示範” 小筆記
+
+Step D — 找 1 份 Entry-Level 職缺 → 做 gap 分析
+
+完成 Final Project 的核心精神。
