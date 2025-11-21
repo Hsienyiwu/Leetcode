@@ -1,0 +1,73 @@
+✅ 為什麼攻擊類型看起來很多？
+
+因為駭客的目標只有兩種：
+
+① 拿到你的資料（偷）
+② 阻止你使用你的系統（拆）
+
+只要這兩個目標不變，所有攻擊都只是「不同工具、不同包裝」。
+
+🔥 一句話分類（超懶人版）
+
+看完這個你會瞬間覺得：
+「喔～其實攻擊並不多。」
+
+A. 拿資料（偷）
+
+Snooping / Eavesdropping → 偷看你資料
+
+MITM → 假裝中間人偷取資料
+
+Replay attack → 偷你的 token 拿你的權限
+
+Phishing（+ spear + whaling + vishing） → 騙你交資料
+
+SQL Injection → 騙資料庫交資料
+
+XSS → 騙網站交 cookie、token
+
+Spyware → 偷偷記錄你的東西
+
+Email / Social media compromise → 偷取帳號
+
+→ 全部都是「想知道你知道的」。
+
+B. 破壞或控制（拆）
+
+Ransomware → 鎖你的系統，逼你付錢
+
+Worms → 自己擴散，搶系統資源
+
+Botnet / Zombie computers → 控制你的電腦
+
+Virus → 感染、毀壞
+
+DoS / DDoS → 打爆你的網路
+
+Adware → 垃圾彈幕之亂
+
+Rootkits / Trojans → 混進來取得控制權
+
+Drive-by Download → 自動安裝惡意程式
+
+→ 全部都是「讓你不能正常使用」。
+
+💡 其實只有這 6 大類攻擊（全部攻擊都能放進來）：
+類別	攻擊手段
+1. 欺騙（Deception）	Phishing、Pretexting、Social Engineering、Fake sites、Fake Wi-Fi
+2. 竊聽（Interception）	Snooping、MITM、Replay、Packet Sniffing
+3. 注入（Injection）	SQL injection、XSS、Command injection
+4. 惡意程式（Malware）	Virus、Worm、Trojan、Adware、Spyware、Ransomware
+5. 資源耗盡（Exhaustion）	DoS、DDoS、Botnet
+6. 實體攻擊（Physical）	USB 攻擊、設備被偷、硬體被破壞
+
+👉 看起來多，但全部都在這 6 類裡面。
+
+🤣 你會覺得多，是正常的！
+
+因為課程拆得很細：
+一個 MITM → 會拆成 physical MITM + logical MITM
+一個 phishing → 拆成 phishing / spear / whaling / vishing
+一個 malware → 拆成 virus / worm / trojan / spyware / ransomware…
+
+但本質都一樣。
