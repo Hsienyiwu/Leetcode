@@ -71,3 +71,135 @@ Drive-by Download → 自動安裝惡意程式
 一個 malware → 拆成 virus / worm / trojan / spyware / ransomware…
 
 但本質都一樣。
+================================================================================================================
+✅ 攻擊類型 — 6 大核心分類（你只要記這 6 類就不會亂）
+① 欺騙（Deception / Social Engineering）
+
+→ 用騙的，騙你自己交資料、交密碼、交權限
+
+常見手法：
+
+Phishing（大量釣魚）
+
+Spear phishing（針對特定人）
+
+Whaling（針對主管、CEO）
+
+Vishing（語音詐騙）
+
+Pretexting（假冒有權限的人）
+
+Baiting（誘餌 USB、免費下載）
+
+Fake Wi-Fi / Evil Twin
+
+Fake website（偽網站登入頁）
+
+📌 重點：
+所有靠「騙人」來成功的攻擊＝都在這類。
+
+② 竊聽（Interception）
+
+→ 偷聽、偷看、偷截取資料
+
+常見手法：
+
+Eavesdropping（packet sniffing）
+
+MITM（中間人攻擊）
+
+Replay attack（偷 Token 再利用）
+
+Shoulder Surfing（看你螢幕)
+
+Cookie theft
+
+📌 重點：
+你在傳資料 → 他在旁邊偷聽 / 攔截。
+
+③ 注入（Injection）
+
+→ 利用你系統的「漏洞」把惡意指令塞進去
+
+常見手法：
+
+SQL injection（最經典）
+
+XSS（Cross-site scripting）
+
+Command injection
+
+參數注入（Parameter tampering）
+
+📌 重點：
+你應該收資料，結果收到了攻擊指令。
+
+④ 惡意程式（Malware）
+
+→ 把壞東西塞到你電腦裡
+
+常見手法：
+
+Virus（需要使用者啟動）
+
+Worm（自動散播，不需啟動）
+
+Trojan（偽裝成好程式）
+
+Spyware（偷資料）
+
+Adware（強制廣告）
+
+Ransomware（加密勒索）
+
+Rootkit（隱藏存在）
+
+Botnet / Zombie（被遠端控制）
+
+📌 重點：
+拿到你的系統、資料、運算資源，使你功能異常。
+
+⑤ 資源耗盡（Resource Exhaustion）
+
+→ 把你的系統塞爆，讓你沒辦法用
+
+常見手法：
+
+DoS（單一攻擊源）
+
+DDoS（Botnet 群攻）
+
+Buffer overflow（塞爆記憶體）
+
+Traffic flood（塞網路）
+
+📌 重點：
+把你的資源用光 → 你癱瘓。
+
+⑥ 實體攻擊（Physical Security Attacks）
+
+→ 直接摸你的機器、拔你的 USB、偷你的硬碟
+
+常見場景：
+
+偷設備（筆電、手機、硬碟）
+
+插惡意 USB（Rubber Ducky）
+
+破壞機房 / 斷電 / 泄漏
+
+Dumpster diving（翻垃圾找機密）
+
+未授權進入伺服器室
+
+📌 重點：
+一旦摸到機器本體，軟體防禦就幾乎無效。
+
+🎯 一句話總結（超速記版）
+類型	精簡記法
+欺騙	騙你交資料
+竊聽	偷看你的資料
+注入	把指令塞進去
+惡意程式	把壞東西塞進你電腦
+資源耗盡	把你塞爆讓你不能用
+實體攻擊	直接動你的機器
