@@ -1,0 +1,141 @@
+📌 Physical Cybersecurity Controls（筆記版 / 超濃縮）
+
+物理資安 = 透過設備、設施、人員、技術保護硬體、資料、網路與基礎設施。
+
+1. On-premises（場域 / 建築物）控制
+✔ Smart locks / Access control
+
+臉部識別、指紋、生物辨識
+
+可整合 CCTV、警報 → 即時回應
+
+✔ Security cameras
+
+外圍 + 重要區域全天候錄影
+
+✔ Security personnel
+
+肉眼巡邏、實體事件即時處理
+
+✔ Fences / Barriers
+
+阻止未授權進入
+
+✔ Mantrap doors（單人通行門）
+
+控制敏感區域進出，一次只允許一人
+
+2. Server Rooms（機房）控制
+✔ Biometric access controls
+
+嚴格限制進出人員
+
+✔ Environmental controls
+
+HVAC 溫濕度控制
+
+Fire suppression 滅火系統
+
+✔ Rack locks
+
+機櫃加鎖，避免接觸硬體
+
+✔ Video surveillance
+
+紀錄誰出入、何時出入
+
+✔ Tamper detection sensors
+
+偵測拆機、破壞、未授權操作
+
+3. Environmental Safety Measures（環境安全）
+✔ Climate control
+
+專用溫濕度調節
+
+✔ ESD protection
+
+防靜電地墊、手環、接地台
+
+✔ Power surge protectors
+
+避免電壓突波燒壞設備
+
+✔ Backup power supplies
+
+UPS + 發電機確保不中斷運作
+
+✔ Water detection systems
+
+偵測漏水、淹水 → 及早警示
+
+4. Device Protection（裝置保護）
+✔ Cable locks
+
+固定筆電、避免偷走
+
+✔ Port locks
+
+USB / 其他 port 鎖上 → 防止未授權插拔
+
+✔ Screen filters
+
+防視覺側錄（肩窺）
+
+✔ Hard disk encryption
+
+裝置遺失 → 資料仍安全
+
+✔ Asset tags + Tracking
+
+設備管理 + 協助找回遺失物
+
+5. Cutting-edge Solutions（先進物理資安）
+✔ Drone detection systems
+
+Radar / 聲學 / 頻率掃描
+
+偵測、追蹤、甚至中和不明無人機
+
+✔ Robotic security guards
+
+自主巡邏、偵測入侵、通報事件
+
+可穿越複雜地形（樓梯、狹窄空間）
+
+✔ AI security systems
+
+數據分析 → 偵測異常
+
+可自動化門禁、監控
+
+持續學習 → 對新威脅更有效
+
+✔ Intelligent perimeter security
+
+AI / ML 辨識威脅 vs. 非威脅（動物、風、垃圾 vs. 人類入侵）
+
+提供即時告警 → 加快反應時間
+
+📌 超短重點整理（30秒小抄）
+物理控制類型：四大類
+
+建築物：門禁、生物辨識、攝影機、圍籬、人員、單人門
+
+機房：HVAC、滅火、機櫃鎖、監視、拆封警示
+
+環境：溫濕度控制、ESD、防突波、UPS、漏水偵測
+
+裝置：線鎖、USB 鎖、隱私片、磁碟加密、資產追蹤
+
+先進技術：四項
+
+無人機偵測
+
+機器人巡邏
+
+AI 安全分析
+
+智慧圍界偵測
+
+👉 核心一句話：物理資安 = 阻擋人、保護設備、控管環境、確保不中斷。
